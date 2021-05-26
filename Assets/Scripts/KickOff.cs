@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class KickOff : MonoBehaviour
 {
-    public Vector3 kickDirection;
     public float maxPower;
     public float actualPower;
 
@@ -14,6 +13,7 @@ public class KickOff : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
         startPos = transform.position;
     }
 
@@ -30,13 +30,18 @@ public class KickOff : MonoBehaviour
         }
         if (Input.GetButtonUp("Jump"))
         {
-            rb.AddForce(kickDirection * actualPower, ForceMode.Impulse);
+            startPos = transform.position; // for debugging
+            rb.useGravity = true;
+            rb.AddForce((transform.forward + (transform.up * 0.33f)) * actualPower, ForceMode.Impulse); // schieße in Richtung Forward mit voller Power 
+                                                                                                        // und in Richtung Up mit Drittel-Power
             rb.AddTorque(Random.insideUnitSphere * actualPower);
         }
         // for debugging
         if (Input.GetKeyDown(KeyCode.R))
         {
+            rb.useGravity = false;
             transform.position = startPos;
+            transform.rotation = Quaternion.identity;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
