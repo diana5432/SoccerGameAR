@@ -27,6 +27,6 @@ public class StatusBarFill : MonoBehaviour
             fillImage.enabled = true;
         }
        */
-        slider.value = kickOff.actualPower;
+        slider.value = kickOff.actualPower / kickOff.maxPower;
     }
 }

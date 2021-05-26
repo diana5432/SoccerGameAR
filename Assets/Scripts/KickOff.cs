@@ -30,7 +30,7 @@ public class KickOff : MonoBehaviour
         }
         if (Input.GetButtonUp("Jump"))
         {
-            rb.AddForce(kickDirection * actualPower);
+            rb.AddForce(kickDirection * actualPower, ForceMode.Impulse);
             rb.AddTorque(Random.insideUnitSphere * actualPower);
         }
         // for debugging
