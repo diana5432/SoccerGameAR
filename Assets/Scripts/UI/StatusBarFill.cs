@@ -3,8 +3,7 @@ using UnityEngine.UI;
 
 public class StatusBarFill : MonoBehaviour
 {
-    public KickOff kickOff;
-    public Image fillImage;
+    [SerializeField] private KickOff kickOff;
 
     private Slider slider;
 
@@ -17,16 +16,6 @@ public class StatusBarFill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (slider.value < slider.minValue)
-        {
-            fillImage.enabled = false;
-        }
-        if (slider.value > slider.minValue && !fillImage.enabled)
-        {
-            fillImage.enabled = true;
-        }
-       */
         slider.value = kickOff.GetActualPower() / kickOff.GetMaxPower();
     }
 }
