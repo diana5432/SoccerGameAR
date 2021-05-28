@@ -3,19 +3,19 @@ using UnityEngine.UI;
 
 public class StatusBarFill : MonoBehaviour
 {
-    [SerializeField] private KickOff kickOff;
+    [SerializeField] private BallController _ball;
 
-    private Slider slider;
+    private Slider _slider;
 
     // Start is called before the first frame update
     void Start()
     {
-        slider = GetComponent<Slider>();
+        _slider = GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        slider.value = kickOff.GetActualPower() / kickOff.GetMaxPower();
+        _slider.value = _ball.GetActualPower() / _ball.GetMaxPower();
     }
 }
