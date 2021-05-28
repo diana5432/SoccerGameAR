@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class KickOff : MonoBehaviour
 {
-    public float maxPower;
-    public float actualPower;
+    [SerializeField] private float maxPower;
+    [SerializeField] private float actualPower;
+    [SerializeField] private float speed = 1f;
 
     private Rigidbody rb;
     private float timeCorrection;
@@ -26,7 +27,7 @@ public class KickOff : MonoBehaviour
         }
         if (Input.GetButton("Jump"))
         {
-            actualPower = Mathf.Abs(Mathf.Sin(Time.time - timeCorrection)) * maxPower;
+            actualPower = Mathf.Abs(Mathf.Sin((Time.time - timeCorrection) * speed)) * maxPower;
         }
         if (Input.GetButtonUp("Jump"))
         {
@@ -44,7 +45,10 @@ public class KickOff : MonoBehaviour
             transform.rotation = Quaternion.identity;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-
         }
     }
+
+    // Getters
+    public float GetMaxPower(){ return maxPower; }
+    public float GetActualPower(){ return actualPower; }
 }
