@@ -18,7 +18,26 @@ public class KickOff : MonoBehaviour
         startPos = transform.position;
     }
 
+    private void OnMouseDown()
+    {
+        timeCorrection = Time.time;
+    }
+
+    private void OnMouseDrag()
+    {
+        actualPower = Mathf.Abs(Mathf.Sin((Time.time - timeCorrection) * speed)) * maxPower;
+    }
+
+    private void OnMouseUp()
+    {
+        startPos = transform.position; // for debugging
+        rb.useGravity = true;
+        rb.AddForce((transform.forward + (transform.up * 0.33f)) * actualPower, ForceMode.Impulse);
+        rb.AddTorque(Random.insideUnitSphere * actualPower);
+    }
+
     // Update is called once per frame
+    /*
     void Update()
     {
         if (Input.GetButtonDown("Jump"))
@@ -46,7 +65,7 @@ public class KickOff : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-    }
+    }*/
 
     // Getters
     public float GetMaxPower(){ return maxPower; }
