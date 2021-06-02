@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class GameSceneController : Observer
 {
     [SerializeField] private GoalController _goal;
-    [SerializeField] private int _trials = 2;
+    [SerializeField] private int _trials = 3;
     [SerializeField] private int _points = 0;
 
     private void Start()
@@ -22,6 +23,21 @@ public class GameSceneController : Observer
             _trials -= 1;
             _points += 100;
         }
+        if (_trials < 1)
+            //EndSeries();
+            Debug.Log("series end!");
+        //else
+            //ResetBall();
+    }
+
+    private void ResetBall()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void EndSeries()
+    {
+        throw new NotImplementedException();
     }
 }
 
