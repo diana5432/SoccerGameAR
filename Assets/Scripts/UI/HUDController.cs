@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -79,5 +78,10 @@ public class HUDController : Observer
     {
         foreach (Image ball in _ballImages)
             ball.gameObject.SetActive(true);
+    }
+
+    private void ColorizeBall(int imageIndex, Color color)
+    {
+        _ballImages[imageIndex].color = color;
     }
 }

@@ -8,7 +8,6 @@ public class GoalController : Subject
         {
             Vector3 hitPosition = other.ClosestPoint(transform.position);
             float hitDistanceFromCenter = Vector3.Distance(hitPosition, transform.position);
-            Debug.Log("Hit distance: " + hitDistanceFromCenter);
             Notify(hitDistanceFromCenter, NotificationType.GoalHit);
         }
     }

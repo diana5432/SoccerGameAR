@@ -53,4 +53,5 @@ public class BallController : Subject
     // Getters
     public float GetMaxPower(){ return _maxPower; }
     public float GetActualPower(){ return _actualPower; }
+    public void SetActualPower(float power){ _actualPower = power;}
 }

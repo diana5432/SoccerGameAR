@@ -61,7 +61,13 @@ public class GameSceneController : Observer
         _trials = _maxTrials;
         _points = 0;
         _ball.ResetPosition();
+        _ball.SetActualPower(0f);
         _HUD.UpdateScore(_points);
         _HUD.ResetBalls();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
