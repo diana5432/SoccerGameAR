@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45039183, g: 0.500405, b: 0.57524514, a: 1}
+  m_IndirectSpecularColor: {r: 0.4503917, g: 0.5004045, b: 0.57524514, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goal: {fileID: 1096933705}
+  _ball: {fileID: 1848957012}
   _trials: 2
   _points: 0
 --- !u!4 &200642330
@@ -232,7 +233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200642328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.555553, y: 224.91666, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -517,7 +518,7 @@ GameObject:
   - component: {fileID: 624650809}
   - component: {fileID: 624650808}
   m_Layer: 5
-  m_Name: ball2
+  m_Name: ball0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,7 +709,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &715633671
 MonoBehaviour:
@@ -723,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1051,7 +1052,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1269149623
 GameObject:
@@ -1095,7 +1096,7 @@ GameObject:
   - component: {fileID: 1325013237}
   - component: {fileID: 1325013236}
   m_Layer: 5
-  m_Name: ball0
+  m_Name: ball2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1359,7 +1360,7 @@ RectTransform:
   - {fileID: 2076168596}
   - {fileID: 1166871322}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1378,12 +1379,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c1e8904d2187e4082de3fd6d359bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ballImages:
-  - {fileID: 1325013236}
-  - {fileID: 1654410413}
-  - {fileID: 624650808}
-  _goalText: {fileID: 554871965}
   _goal: {fileID: 1096933705}
+  _ball: {fileID: 1848957012}
+  _ballImages:
+  - {fileID: 624650808}
+  - {fileID: 1654410413}
+  - {fileID: 1325013236}
+  _goalText: {fileID: 554871965}
 --- !u!1 &1434820541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,7 +1802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: 0}
+  m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 50, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1831745892
@@ -1866,8 +1868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6013267d56e4d4a8d48edd9b2e690e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ball: {fileID: 0}
-  _slider: {fileID: 0}
+  _ball: {fileID: 1848957012}
 --- !u!1001 &1848957009
 PrefabInstance:
   m_ObjectHideFlags: 0

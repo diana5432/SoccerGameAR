@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GameSceneController : Observer
 {
-    [SerializeField] private GoalController _goal;
+    [SerializeField] private GoalController _goal; // Subject
+    [SerializeField] private BallController _ball; // Subject
     [SerializeField] private int _trials = 3;
     [SerializeField] private int _points = 0;
 
@@ -13,6 +14,8 @@ public class GameSceneController : Observer
     {
         if (_goal!=null)
             _goal.RegisterObserver(this);
+        if (_ball!=null)
+            _ball.RegisterObserver(this);
     }
 
     public override void OnNotify(object value, NotificationType notificationType)
@@ -23,25 +26,20 @@ public class GameSceneController : Observer
             _trials -= 1;
             _points += 100;
         }
-        if (_trials < 1)
+        if (_trials <= 0)
             //EndSeries();
             Debug.Log("series end!");
-        //else
-            //ResetBall();
+        else
+            Invoke("ResetBall", 3);
     }
 
     private void ResetBall()
     {
-        throw new NotImplementedException();
+        _ball.ResetPosition();
     }
 
     private void EndSeries()
     {
         throw new NotImplementedException();
     }
-}
-
-public enum NotificationType
-{
-    GoalHit
 }

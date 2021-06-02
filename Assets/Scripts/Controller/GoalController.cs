@@ -8,7 +8,7 @@ public class GoalController : Subject
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            Notify(1, NotificationType.GoalHit);
+            Notify(0, NotificationType.GoalHit);
         }
     }
 }

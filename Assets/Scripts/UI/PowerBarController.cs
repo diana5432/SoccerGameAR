@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatusBarFill : MonoBehaviour
+public class PowerBarController : MonoBehaviour
 {
     [SerializeField] private BallController _ball;
 

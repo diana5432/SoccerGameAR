@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BallController : MonoBehaviour
+public class BallController : Subject
 {
     [SerializeField] private Transform _penaltySpot;
     [SerializeField] private float _maxPower = 10f;
@@ -9,6 +9,7 @@ public class BallController : MonoBehaviour
 
     private Rigidbody _rb;
     private float _timeCorrection;
+    private int _ballShotIndex = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,9 @@ public class BallController : MonoBehaviour
         _rb.useGravity = true;
         _rb.AddForce((_penaltySpot.forward + (_penaltySpot.up * 0.33f)) * _actualPower, ForceMode.Impulse);
         _rb.AddTorque(Random.insideUnitSphere * _actualPower);
+        Notify(_ballShotIndex, NotificationType.BallShot);
+        Debug.Log("BallController notified with index " + _ballShotIndex);
+        _ballShotIndex++;
     }
 
     private void Update()
