@@ -8,6 +8,8 @@ public class GoalController : Subject
     {
         if (other.gameObject.CompareTag("Ball"))
         {
+            Debug.Log(other.ClosestPointOnBounds(transform.position));
+            Debug.Log(other.ClosestPointOnBounds(other.transform.position));
             Notify(0, NotificationType.GoalHit);
         }
     }

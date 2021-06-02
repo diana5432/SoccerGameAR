@@ -4,15 +4,16 @@ using UnityEngine.UI;
 
 public class HUDController : Observer
 {
-    [SerializeField] private GoalController _goal; // Subject
-    [SerializeField] private BallController _ball; // Subject
-
+    // Observed subject
+    [SerializeField] private GoalController _goal; 
+    [SerializeField] private BallController _ball; 
+    // Referenced objects
     [SerializeField] private Image[] _ballImages;
     [SerializeField] private GameObject _goalText;
+    // Parameters
+    [SerializeField] float _goalTextDuration = 2f;
 
-    private GameSceneController gameSceneController;
-
-
+    
     private void Start()
     {
         if (_goal!=null)
@@ -26,7 +27,7 @@ public class HUDController : Observer
         if (notificationType == NotificationType.GoalHit)
         {
             Debug.Log("HUDController received GoalHit");
-            ShowGoalText(2f);
+            ShowGoalText(_goalTextDuration);
         }
 
         if (notificationType == NotificationType.BallShot)
