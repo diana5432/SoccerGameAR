@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class KeeperController : MonoBehaviour
 {
-    [SerializeField] private float minWaitTime = 1f;
-    [SerializeField] private float maxWaitTime = 3f;
+    [SerializeField] private float minWaitTime = 0.5f;
+    [SerializeField] private float maxWaitTime = 2.5f;
     
     private AnimationClip[] clips;
     private Animator animator;

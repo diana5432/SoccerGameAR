@@ -33,22 +33,21 @@ public class BallController : Subject
         _rb.AddForce((_penaltySpot.forward + (_penaltySpot.up * 0.33f)) * _actualPower, ForceMode.Impulse);
         _rb.AddTorque(Random.insideUnitSphere * _actualPower);
         Notify(_ballShotIndex, NotificationType.BallShot);
-        Debug.Log("BallController notified with index " + _ballShotIndex);
         _ballShotIndex++;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            ResetPosition();
-    }
     public void ResetPosition()
+    {
+        FreezePosition();
+        transform.position = _penaltySpot.position;
+        transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 180f);
+    }
+
+    public void FreezePosition()
     {
         _rb.useGravity = false;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
-        transform.position = _penaltySpot.position;
-        transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 180f);
     }
 
     // Getters

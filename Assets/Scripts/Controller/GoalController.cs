@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoalController : Subject
@@ -8,9 +6,10 @@ public class GoalController : Subject
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            Debug.Log(other.ClosestPointOnBounds(transform.position));
-            Debug.Log(other.ClosestPointOnBounds(other.transform.position));
-            Notify(0, NotificationType.GoalHit);
+            Vector3 hitPosition = other.ClosestPoint(transform.position);
+            float hitDistanceFromCenter = Vector3.Distance(hitPosition, transform.position);
+            Debug.Log("Hit distance: " + hitDistanceFromCenter);
+            Notify(hitDistanceFromCenter, NotificationType.GoalHit);
         }
     }
 }

@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class GameSceneController : Observer
 {
-    [SerializeField] private GoalController _goal; // Subject
-    [SerializeField] private BallController _ball; // Subject
-    [SerializeField] private int _trials = 3;
-    [SerializeField] private int _points = 0;
+    // Observed subject
+    [SerializeField] private GoalController _goal; 
+    [SerializeField] private BallController _ball; 
+    // Referenced objects
+    [SerializeField] private HUDController _HUD;
+    // Parameters
+    [SerializeField] private int _maxTrials = 3;
+    [SerializeField] private float _ballResetDuration = 3f;
+    
+    private int _trials;
+    private int _points;
 
     private void Start()
     {
@@ -16,21 +23,25 @@ public class GameSceneController : Observer
             _goal.RegisterObserver(this);
         if (_ball!=null)
             _ball.RegisterObserver(this);
+
+        _trials = _maxTrials;
+        _points = 0;
     }
 
     public override void OnNotify(object value, NotificationType notificationType)
     {
+        if (notificationType == NotificationType.BallShot)
+            _trials -= 1;
+
         if (notificationType == NotificationType.GoalHit)
         {
-            Debug.Log("GOOOOOAAAL!");
-            _trials -= 1;
-            _points += 100;
+            _points += (int)((float)value * 1000);
+            _HUD.UpdateScore(_points);
         }
         if (_trials <= 0)
-            //EndSeries();
-            Debug.Log("series end!");
+            Invoke("EndSeries", _ballResetDuration);
         else
-            Invoke("ResetBall", 3);
+            Invoke("ResetBall", _ballResetDuration);
     }
 
     private void ResetBall()
@@ -40,6 +51,17 @@ public class GameSceneController : Observer
 
     private void EndSeries()
     {
-        throw new NotImplementedException();
+        _HUD.ShowPauseMenu();
+        _ball.FreezePosition();
+    }
+
+    public void RestartSeries()
+    {
+        _HUD.HidePauseMenu();
+        _trials = _maxTrials;
+        _points = 0;
+        _ball.ResetPosition();
+        _HUD.UpdateScore(_points);
+        _HUD.ResetBalls();
     }
 }
