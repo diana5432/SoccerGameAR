@@ -5,84 +5,122 @@ using UnityEngine.UI;
 public class HUDController : MonoBehaviour, Observer 
 {
     // Observed subject
+    [SerializeField] private SeriesController _series;
     [SerializeField] private GoalController _goal; 
     [SerializeField] private BallController _ball; 
     // Referenced objects
     [SerializeField] private Image[] _ballImages;
     [SerializeField] private TMP_Text _scoreText;
-    [SerializeField] private GameObject _goalText;
     [SerializeField] private GameObject _pauseMenu;
-
+    [SerializeField] private GameObject _resumeButton;
+    [SerializeField] private GameObject _scanText;
+    [SerializeField] private GameObject _scaleText;
+    [SerializeField] private GameObject _kickOffText;
+    [SerializeField] private GameObject _goalText;
+    [SerializeField] private GameObject _missedText;
+    [SerializeField] private GameObject _doneText;
     // Parameters
-    [SerializeField] float _goalTextDuration = 2f;
+    [SerializeField] float _promptDuration = 2f;
 
-    private bool _isPaused;
-
+    private GameObject _currentStatusText;
     
     private void Start()
     {
+        if (_series!=null)
+            _series.RegisterObserver(this);
         if (_goal!=null)
             _goal.RegisterObserver(this);
         if (_ball!=null)
             _ball.RegisterObserver(this);
-
-        _isPaused = false;
+        
+        if (!_scanText.activeSelf)
+            ShowStatusText(_scanText);
     }
 
     public void OnNotify(object value, NotificationType notificationType)
     {
-        if (notificationType == NotificationType.GoalHit)
+        if (notificationType == NotificationType.SeriesScan)
         {
-            ShowGoalText(_goalTextDuration);
+            HideStatusText();
+            HidePauseMenu();
+            ResetBalls();
+            ShowStatusText(_scanText);
         }
-
+        if (notificationType == NotificationType.SeriesScale)
+        {
+            HideStatusText();
+            ShowStatusText(_scaleText);
+        }
+        if (notificationType == NotificationType.SeriesPlay)
+        {
+            HideStatusText();
+            ShowStatusText(_kickOffText, _promptDuration);
+        }
         if (notificationType == NotificationType.BallShot)
         {
             HideBall((int)value % _ballImages.Length);
         }
-        //if (notificationType == NotificationType.SeriesEnd)
-            //show final points and menu quit/restart
-        //if (notificationType == NotificationType.SeriesRestart)
-            //ResetBalls();
-
+        if (notificationType == NotificationType.GoalHit)
+        {
+            ShowStatusText(_goalText, _promptDuration);
+        }
+        if (notificationType == NotificationType.ScoreChange)
+        {
+            UpdateScore((int) value);
+        }
+        if (notificationType == NotificationType.SeriesDone)
+        {
+            // TODO show final points and menu quit/restart
+            ShowStatusText(_doneText);
+            Invoke("ShowPauseMenu", 1f);
+        }
     }
 
-    public void ShowPauseMenu()
+    private void ShowPauseMenu()
     {
-        _isPaused = true;
         _pauseMenu.SetActive(true);
+        if (_series.GetPhase() == ((int) SeriesPhase.DONE))
+            _resumeButton.SetActive(false);
+        else
+            if (!_resumeButton.activeSelf)
+                _resumeButton.SetActive(true);
     }
 
-    public void HidePauseMenu()
+    private void HidePauseMenu()
     {
-        _isPaused = false;
         _pauseMenu.SetActive(false);
     }
 
     public void TogglePauseMenu()
     {
-        if (_isPaused)
+        if (_pauseMenu.activeSelf)
             HidePauseMenu();
         else
             ShowPauseMenu();
     }
 
-
-
-    public void UpdateScore(int score)
+    private void UpdateScore(int score)
     {
         _scoreText.text = score.ToString("D5");
     }
 
-    private void ShowGoalText(float duration)
+    private void ShowStatusText(GameObject statusText, float duration)
     {
-        _goalText.gameObject.SetActive(true);
-        Invoke("HideGoalText", duration);
+        _currentStatusText = statusText;
+        _currentStatusText.SetActive(true);
+        Invoke("HideStatusText", duration);
     }
 
-    private void HideGoalText()
+    private void ShowStatusText(GameObject statusText)
     {
-        _goalText.gameObject.SetActive(false);
+        _currentStatusText = statusText;
+        _currentStatusText.SetActive(true);
+    }
+
+    private void HideStatusText()
+    {
+        if (_currentStatusText!=null)
+            _currentStatusText.SetActive(false);
     }
 
     private void HideBall(int imageIndex)
