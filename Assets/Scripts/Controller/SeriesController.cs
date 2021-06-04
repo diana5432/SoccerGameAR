@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSceneController : Observer
+public class SeriesController : Observer
 {
     // Observed subject
     [SerializeField] private GoalController _goal; 
@@ -11,11 +11,13 @@ public class GameSceneController : Observer
     // Referenced objects
     [SerializeField] private HUDController _HUD;
     // Parameters
-    [SerializeField] private int _maxTrials = 3;
     [SerializeField] private float _ballResetDuration = 3f;
     
+    private int _maxTrials = 3;
     private int _trials;
     private int _points;
+    private int _phase;
+
 
     private void Start()
     {
@@ -26,6 +28,7 @@ public class GameSceneController : Observer
 
         _trials = _maxTrials;
         _points = 0;
+        _phase = (int) SeriesPhase.SCAN;
     }
 
     public override void OnNotify(object value, NotificationType notificationType)
@@ -39,7 +42,10 @@ public class GameSceneController : Observer
             _HUD.UpdateScore(_points);
         }
         if (_trials <= 0)
-            Invoke("EndSeries", _ballResetDuration);
+        {
+            _phase = (int) SeriesPhase.DONE;
+            Invoke("SeriesDone", _ballResetDuration);
+        }
         else
             Invoke("ResetBall", _ballResetDuration);
     }
@@ -49,7 +55,7 @@ public class GameSceneController : Observer
         _ball.ResetPosition();
     }
 
-    private void EndSeries()
+    private void SeriesDone()
     {
         _HUD.ShowPauseMenu();
         _ball.FreezePosition();
@@ -66,8 +72,24 @@ public class GameSceneController : Observer
         _HUD.ResetBalls();
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
+    // ONLY FOR DEBUGGING
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.N))
+            if (_phase == (int) SeriesPhase.SCAN)
+                _phase = (int) SeriesPhase.SCALE;
+        
+        if (Input.GetKeyDown(KeyCode.M))
+            if (_phase == (int) SeriesPhase.SCALE)
+                _phase = (int) SeriesPhase.PLAY;
+        
+        
     }
+}
+
+public enum SeriesPhase
+{
+    SCAN,   // scan for goal image tracker
+    SCALE,  // scale goal 
+    PLAY,   // kick off
+    DONE    // show rating
 }

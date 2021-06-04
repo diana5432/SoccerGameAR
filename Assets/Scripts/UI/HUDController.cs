@@ -16,6 +16,8 @@ public class HUDController : Observer
     // Parameters
     [SerializeField] float _goalTextDuration = 2f;
 
+    private bool _isPaused;
+
     
     private void Start()
     {
@@ -23,6 +25,8 @@ public class HUDController : Observer
             _goal.RegisterObserver(this);
         if (_ball!=null)
             _ball.RegisterObserver(this);
+
+        _isPaused = false;
     }
 
     public override void OnNotify(object value, NotificationType notificationType)
@@ -45,13 +49,25 @@ public class HUDController : Observer
 
     public void ShowPauseMenu()
     {
+        _isPaused = true;
         _pauseMenu.SetActive(true);
     }
 
     public void HidePauseMenu()
     {
+        _isPaused = false;
         _pauseMenu.SetActive(false);
     }
+
+    public void TogglePauseMenu()
+    {
+        if (_isPaused)
+            HidePauseMenu();
+        else
+            ShowPauseMenu();
+    }
+
+
 
     public void UpdateScore(int score)
     {

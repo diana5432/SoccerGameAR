@@ -1823,7 +1823,6 @@ GameObject:
   - component: {fileID: 1642886198}
   - component: {fileID: 1642886197}
   - component: {fileID: 1642886196}
-  - component: {fileID: 1642886195}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -1831,28 +1830,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1642886195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1642886194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04c1e8904d2187e4082de3fd6d359bb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _goal: {fileID: 0}
-  _ball: {fileID: 0}
-  _ballImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _scoreText: {fileID: 0}
-  _goalText: {fileID: 0}
-  _pauseMenu: {fileID: 174082453}
-  _goalTextDuration: 2
 --- !u!114 &1642886196
 MonoBehaviour:
   m_ObjectHideFlags: 0
