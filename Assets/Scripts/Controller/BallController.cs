@@ -10,8 +10,8 @@ public class BallController : Subject
     private Rigidbody _rb;
     private float _timeCorrection;
     private int _ballShotIndex = 0;
-    
-    // Start is called before the first frame update
+
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -41,6 +41,7 @@ public class BallController : Subject
         FreezePosition();
         transform.position = _penaltySpot.position;
         transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 180f);
+        _actualPower = 0f;
     }
 
     public void FreezePosition()
@@ -53,5 +54,5 @@ public class BallController : Subject
     // Getters
     public float GetMaxPower(){ return _maxPower; }
     public float GetActualPower(){ return _actualPower; }
-    public void SetActualPower(float power){ _actualPower = power;}
+    //public void SetActualPower(float power){ _actualPower = power;}
 }

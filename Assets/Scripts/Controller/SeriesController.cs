@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeriesController : Observer
+public class SeriesController : Subject, Observer 
 {
     // Observed subject
     [SerializeField] private GoalController _goal; 
@@ -31,7 +31,7 @@ public class SeriesController : Observer
         _phase = (int) SeriesPhase.SCAN;
     }
 
-    public override void OnNotify(object value, NotificationType notificationType)
+    public void OnNotify(object value, NotificationType notificationType)
     {
         if (notificationType == NotificationType.BallShot)
             _trials -= 1;
@@ -57,17 +57,16 @@ public class SeriesController : Observer
 
     private void SeriesDone()
     {
-        _HUD.ShowPauseMenu();
         _ball.FreezePosition();
+        _HUD.ShowPauseMenu();
     }
 
     public void RestartSeries()
     {
-        _HUD.HidePauseMenu();
         _trials = _maxTrials;
         _points = 0;
         _ball.ResetPosition();
-        _ball.SetActualPower(0f);
+        _HUD.HidePauseMenu();
         _HUD.UpdateScore(_points);
         _HUD.ResetBalls();
     }
@@ -81,15 +80,5 @@ public class SeriesController : Observer
         if (Input.GetKeyDown(KeyCode.M))
             if (_phase == (int) SeriesPhase.SCALE)
                 _phase = (int) SeriesPhase.PLAY;
-        
-        
     }
-}
-
-public enum SeriesPhase
-{
-    SCAN,   // scan for goal image tracker
-    SCALE,  // scale goal 
-    PLAY,   // kick off
-    DONE    // show rating
 }

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDController : Observer
+public class HUDController : MonoBehaviour, Observer 
 {
     // Observed subject
     [SerializeField] private GoalController _goal; 
@@ -29,7 +29,7 @@ public class HUDController : Observer
         _isPaused = false;
     }
 
-    public override void OnNotify(object value, NotificationType notificationType)
+    public void OnNotify(object value, NotificationType notificationType)
     {
         if (notificationType == NotificationType.GoalHit)
         {
