@@ -25,7 +25,7 @@ public class SeriesController : Subject, Observer
         if (_ball!=null)
             _ball.RegisterObserver(this);
 
-        StartSeries();
+        SeriesStart();
     }
 
     public void OnNotify(object value, NotificationType notificationType)
@@ -46,7 +46,7 @@ public class SeriesController : Subject, Observer
             Invoke("ResetBall", _ballResetDuration);
     }
 
-    public void StartSeries()
+    public void SeriesStart()
     {
         _phase = (int) SeriesPhase.SCAN;
         Notify(0,NotificationType.SeriesScan);
@@ -56,9 +56,16 @@ public class SeriesController : Subject, Observer
         _ball.ResetPosition();
     }
 
-    private void ResetBall()
+    public void SeriesScale()
     {
-        _ball.ResetPosition();
+        _phase = (int) SeriesPhase.SCALE;
+        Notify(0,NotificationType.SeriesScale);
+    }
+
+    public void SeriesPlay()
+    {
+        _phase = (int) SeriesPhase.PLAY;
+        Notify(0,NotificationType.SeriesPlay);
     }
 
     private void SeriesDone()
@@ -66,6 +73,11 @@ public class SeriesController : Subject, Observer
         _phase = (int) SeriesPhase.DONE;
         Notify(0, NotificationType.SeriesDone);
         _ball.FreezePosition();
+    }
+
+    private void ResetBall()
+    {
+        _ball.ResetPosition();
     }
 
     public int GetPhase()
@@ -80,8 +92,7 @@ public class SeriesController : Subject, Observer
         {
             if (_phase == (int) SeriesPhase.SCAN)
             {
-                _phase = (int) SeriesPhase.SCALE;
-                Notify(0,NotificationType.SeriesScale);
+                SeriesScale();
             }
         }
         
@@ -89,8 +100,7 @@ public class SeriesController : Subject, Observer
         {
             if (_phase == (int) SeriesPhase.SCALE)
             {
-                _phase = (int) SeriesPhase.PLAY;
-                Notify(0,NotificationType.SeriesPlay);
+                SeriesPlay();
             }
         }
     
