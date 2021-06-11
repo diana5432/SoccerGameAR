@@ -1,6 +1,7 @@
 public enum NotificationType
 {
     BallShot,
+    DistanceChange,
     GoalHit,
     ScoreChange,
     SeriesScan,

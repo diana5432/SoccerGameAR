@@ -53,7 +53,6 @@ public class SeriesController : Subject, Observer
         _trials = _maxTrials;
         _points = 0;
         Notify(_points, NotificationType.ScoreChange);
-        _ball.ResetPosition();
     }
 
     public void SeriesScale()
@@ -72,7 +71,6 @@ public class SeriesController : Subject, Observer
     {
         _phase = (int) SeriesPhase.DONE;
         Notify(0, NotificationType.SeriesDone);
-        _ball.FreezePosition();
     }
 
     private void ResetBall()

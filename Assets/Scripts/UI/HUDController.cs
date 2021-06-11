@@ -11,8 +11,12 @@ public class HUDController : MonoBehaviour, Observer
     // Referenced objects
     [SerializeField] private Image[] _ballImages;
     [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private TMP_Text _distanceText;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _resumeButton;
+    [SerializeField] private GameObject _placingMenu;
+    [SerializeField] private GameObject _scalingMenu;
+    [SerializeField] private GameObject _powerBar;
     [SerializeField] private GameObject _scanText;
     [SerializeField] private GameObject _scaleText;
     [SerializeField] private GameObject _kickOffText;
@@ -24,7 +28,7 @@ public class HUDController : MonoBehaviour, Observer
 
     private GameObject _currentStatusText;
     
-    private void Start()
+    private void Awake()
     {
         if (_series!=null)
             _series.RegisterObserver(this);
@@ -32,7 +36,9 @@ public class HUDController : MonoBehaviour, Observer
             _goal.RegisterObserver(this);
         if (_ball!=null)
             _ball.RegisterObserver(this);
-        
+    }
+    private void Start() 
+    {
         if (!_scanText.activeSelf)
             ShowStatusText(_scanText);
     }
@@ -44,21 +50,32 @@ public class HUDController : MonoBehaviour, Observer
             HideStatusText();
             HidePauseMenu();
             ResetBalls();
+            UpdateDistance(0f);
+            _powerBar.SetActive(false);
+            _placingMenu.SetActive(true);
             ShowStatusText(_scanText);
         }
         if (notificationType == NotificationType.SeriesScale)
         {
+            _placingMenu.SetActive(false);
+            _scalingMenu.SetActive(true);
             HideStatusText();
             ShowStatusText(_scaleText);
         }
         if (notificationType == NotificationType.SeriesPlay)
         {
+            _scalingMenu.SetActive(false);
+            _powerBar.SetActive(true);
             HideStatusText();
             ShowStatusText(_kickOffText, _promptDuration);
         }
         if (notificationType == NotificationType.BallShot)
         {
             HideBall((int)value % _ballImages.Length);
+        }
+        if (notificationType == NotificationType.DistanceChange)
+        {
+            UpdateDistance((float)value);
         }
         if (notificationType == NotificationType.GoalHit)
         {
@@ -103,6 +120,13 @@ public class HUDController : MonoBehaviour, Observer
     {
         _scoreText.text = score.ToString("D5");
     }
+
+    private void UpdateDistance(float distance)
+    {
+        _distanceText.text = distance.ToString("00.0");
+    }
+
+    
 
     private void ShowStatusText(GameObject statusText, float duration)
     {
