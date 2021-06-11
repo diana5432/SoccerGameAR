@@ -26,6 +26,8 @@ public class KeeperController : MonoBehaviour, Observer
     
     public void OnNotify(object value, NotificationType notificationType)
     {
+        if (notificationType == NotificationType.SeriesScan)
+            StopAllCoroutines();
         if (notificationType == NotificationType.SeriesPlay)
             StartCoroutine(PlayRandomly());
         if (notificationType == NotificationType.SeriesDone)
