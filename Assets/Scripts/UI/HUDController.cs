@@ -106,6 +106,7 @@ public class HUDController : MonoBehaviour, Observer
 
     private void ShowStatusText(GameObject statusText, float duration)
     {
+        HideStatusText();
         _currentStatusText = statusText;
         _currentStatusText.SetActive(true);
         Invoke("HideStatusText", duration);
@@ -119,7 +120,7 @@ public class HUDController : MonoBehaviour, Observer
 
     private void HideStatusText()
     {
-        if (_currentStatusText!=null)
+        if (_currentStatusText!=null && _currentStatusText.activeSelf)
             _currentStatusText.SetActive(false);
     }
 
