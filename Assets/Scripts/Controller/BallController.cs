@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class BallController : Subject
+public class BallController : Subject, Observer
 {
+    // Observed subject
+    [SerializeField] private SeriesController _series;
+
     [SerializeField] private Transform _penaltySpot;
     [SerializeField] private float _maxPower = 10f;
     [SerializeField] private float _actualPower;
@@ -11,12 +14,27 @@ public class BallController : Subject
     private float _timeCorrection;
     private int _ballShotIndex = 0;
 
+    void Awake() {
+        if (_series!=null)
+                _series.RegisterObserver(this);
+    }
 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
     }
 
+    public void OnNotify(object value, NotificationType notificationType)
+    {
+        if (notificationType == NotificationType.SeriesScan)
+        {
+            gameObject.SetActive(false);
+        }
+        if (notificationType == NotificationType.SeriesPlay)
+        {
+            gameObject.SetActive(true);
+        }
+    }
     private void OnMouseDown()
     {
         _timeCorrection = Time.time;
