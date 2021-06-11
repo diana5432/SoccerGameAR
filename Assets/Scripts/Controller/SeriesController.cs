@@ -9,6 +9,8 @@ public class SeriesController : Subject, Observer
     [SerializeField] private GoalController _goal; 
     [SerializeField] private BallController _ball; 
 
+    [SerializeField] private GoalPanelController _goalPanel;
+
     // Parameters
     [SerializeField] private float _ballResetDuration = 3f;
     
@@ -57,8 +59,15 @@ public class SeriesController : Subject, Observer
 
     public void SeriesScale()
     {
-        _phase = (int) SeriesPhase.SCALE;
-        Notify(0,NotificationType.SeriesScale);
+        if (_goalPanel.IsActive())
+        {
+            _phase = (int) SeriesPhase.SCALE;
+            Notify(0,NotificationType.SeriesScale);
+        }
+        else
+        {
+            Debug.Log("Place a Goal at first!");
+        }
     }
 
     public void SeriesPlay()
@@ -83,27 +92,12 @@ public class SeriesController : Subject, Observer
         return _phase;
     }
 
-    // ONLY FOR DEBUGGING
-    private void Update() {
-        // print goal distance with J
+    // for debugging
+    private void Update() 
+    {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            if (_phase == (int) SeriesPhase.SCAN)
-            {
-                SeriesScale();
-            }
+            _goalPanel.SpawnAtPosition(new Vector3(0f, -1.45f, 11f));
         }
-        
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (_phase == (int) SeriesPhase.SCALE)
-            {
-                SeriesPlay();
-            }
-        }
-    
-        if (Input.GetKeyDown(KeyCode.P))
-            Debug.Log("Phase: " +_phase);
-                
-    }
+    } 
 }

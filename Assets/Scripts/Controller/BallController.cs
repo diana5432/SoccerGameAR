@@ -20,7 +20,7 @@ public class BallController : Subject, Observer
     void Awake() 
     {
         if (_series!=null)
-                _series.RegisterObserver(this);
+            _series.RegisterObserver(this);
     }
 
     void Start()
@@ -94,7 +94,7 @@ public class BallController : Subject, Observer
 
     private void HiddenPosition()
     {
-        transform.position = -_penaltySpot.forward * 10f;
+        transform.position = -_penaltySpot.forward * 2f;
     }
 
     // Getters

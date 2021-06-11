@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class GoalController : Subject
 {
+    
     [SerializeField] private Transform _baseLineCenter;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,4 +15,5 @@ public class GoalController : Subject
             Notify(_hitDistanceFromCenter, NotificationType.GoalHit);
         }
     }
+
 }
