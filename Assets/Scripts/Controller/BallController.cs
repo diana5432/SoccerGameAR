@@ -13,6 +13,7 @@ public class BallController : Subject, Observer
     private Rigidbody _rb;
     private float _timeCorrection;
     private int _ballShotIndex = 0;
+    private bool _isReadyToKick;
 
     void Awake() {
         if (_series!=null)
@@ -22,43 +23,49 @@ public class BallController : Subject, Observer
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _isReadyToKick = false;
     }
 
     public void OnNotify(object value, NotificationType notificationType)
     {
-        if (notificationType == NotificationType.SeriesScan)
-        {
-            gameObject.SetActive(false);
-        }
         if (notificationType == NotificationType.SeriesPlay)
         {
-            gameObject.SetActive(true);
+            _isReadyToKick = true;
+        }
+        if (notificationType == NotificationType.SeriesDone)
+        {
+            _isReadyToKick = false;
         }
     }
     private void OnMouseDown()
     {
-        _timeCorrection = Time.time;
+        if (_isReadyToKick)
+            _timeCorrection = Time.time;
     }
 
     private void OnMouseDrag()
     {
-        _actualPower = Mathf.Abs(Mathf.Sin((Time.time - _timeCorrection) * _speedFactor)) * _maxPower;
+        if (_isReadyToKick)
+            _actualPower = Mathf.Abs(Mathf.Sin((Time.time - _timeCorrection) * _speedFactor)) * _maxPower;
     }
 
     private void OnMouseUp()
     {
-        _rb.useGravity = true;
-        _rb.AddForce((_penaltySpot.forward + (_penaltySpot.up * 0.33f)) * _actualPower, ForceMode.Impulse);
-        _rb.AddTorque(Random.insideUnitSphere * _actualPower);
-        Notify(_ballShotIndex, NotificationType.BallShot);
-        _ballShotIndex++;
+        if (_isReadyToKick)
+        {
+            _rb.useGravity = true;
+            _rb.AddForce((_penaltySpot.forward + (_penaltySpot.up * 0.33f)) * _actualPower, ForceMode.Impulse);
+            _rb.AddTorque(Random.insideUnitSphere * _actualPower);
+            Notify(_ballShotIndex, NotificationType.BallShot);
+            _ballShotIndex++;
+        }
     }
 
     public void ResetPosition()
     {
         FreezePosition();
         transform.position = _penaltySpot.position;
-        transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 180f);
+        //transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 180f);
         _actualPower = 0f;
     }
 
