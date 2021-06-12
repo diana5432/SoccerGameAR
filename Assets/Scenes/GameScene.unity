@@ -2902,6 +2902,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &637124036 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 135134225773752490, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
+  m_PrefabInstance: {fileID: 637124031}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &654219059
 GameObject:
   m_ObjectHideFlags: 0
@@ -7115,6 +7120,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2531658323847992175, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_Damping
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531658323847992175, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_BendingStiffness
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531658323847992175, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_SphereColliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531658323847992175, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_SphereColliders.Array.data[0].first
+      value: 
+      objectReference: {fileID: 637124036}
     - target: {fileID: 4567528105584317364, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
       propertyPath: m_RootOrder
       value: 1
