@@ -37,7 +37,6 @@ public class GoalPanelController : MonoBehaviour, Observer
 
     public void Deactivate()
     {
-        Debug.Log("GoalPanel Deactivate");
         gameObject.SetActive(false);
     }
  }
