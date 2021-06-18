@@ -23,11 +23,12 @@ public class GoalPanelController : MonoBehaviour, Observer
 
     public void SpawnAtPosition(Vector3 position)
     {
-        if (!gameObject.activeSelf)
-        {
+        if (_series.GetPhase() == (int) SeriesPhase.SCAN)
             transform.position = position;
+
+        if (!gameObject.activeSelf)
             gameObject.SetActive(true);
-        }
+        
     }
 
     public bool IsActive()

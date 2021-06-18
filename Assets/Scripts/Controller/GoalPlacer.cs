@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -23,7 +24,7 @@ public class GoalPlacer : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            if (_raycastManager.Raycast(touch.position, _hits, TrackableType.PlaneWithinPolygon))
+            if (PhysicRayCastBlockedByUi(touch.position))
             {
                 Pose hitPose = _hits[0].pose;
 
@@ -33,5 +34,30 @@ public class GoalPlacer : MonoBehaviour
 
     }
 
+    private bool PhysicRayCastBlockedByUi(Vector2 touchPosition)
+    {
+        if (PointerOverUI.IsPointerOverUIObject(touchPosition))
+        {
+            return false;
+        }
 
+        return _raycastManager.Raycast(touchPosition, _hits, TrackableType.PlaneWithinPolygon);
+    }
 }
+
+
+// source code from: https://forum.unity.com/threads/ar-foundation-never-blocking-raycaster-on-ui.986688/
+public class PointerOverUI
+{
+    public static bool IsPointerOverUIObject(Vector2 touchPosition)
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = touchPosition;
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+
+        return raycastResults.Count > 0;
+    }
+}
+
