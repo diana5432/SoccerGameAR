@@ -3005,7 +3005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4935240531098310, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.105
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4935240531098310, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4235,7 +4235,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1483880798}
   m_HandleRect: {fileID: 203243713}
   m_Direction: 0
-  m_MinValue: 0.01
+  m_MinValue: 0.025
   m_MaxValue: 0.5
   m_WholeNumbers: 0
   m_Value: 0.25
@@ -4513,7 +4513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104926824}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0915}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.48771477, y: 0.005, z: 0.5296988}
   m_Children: []
   m_Father: {fileID: 1528448869}
@@ -6346,6 +6346,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1014845601}
         m_TargetAssemblyTypeName: ScaleSliderController, Assembly-CSharp
+        m_MethodName: ResetDefaultValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 520426630}
+        m_TargetAssemblyTypeName: RotationSliderController, Assembly-CSharp
         m_MethodName: ResetDefaultValue
         m_Mode: 1
         m_Arguments:
