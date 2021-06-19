@@ -97,7 +97,7 @@ public class SeriesController : Subject, Observer
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            _goalPanel.SpawnAtPosition(new Vector3(0f, -1.45f, 11f));
+            _goalPanel.SpawnAtPosition(new Vector3(0f, 0f, 4f));
         }
     } 
 }

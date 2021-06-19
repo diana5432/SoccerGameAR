@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,7 +48,6 @@ public class HUDController : MonoBehaviour, Observer
     {
         if (notificationType == NotificationType.SeriesScan)
         {
-            HideStatusText();
             HidePauseMenu();
             ResetBalls();
             UpdateDistance(0f);
@@ -59,15 +59,13 @@ public class HUDController : MonoBehaviour, Observer
         {
             _placingMenu.SetActive(false);
             _scalingMenu.SetActive(true);
-            HideStatusText();
             ShowStatusText(_scaleText);
         }
         if (notificationType == NotificationType.SeriesPlay)
         {
             _scalingMenu.SetActive(false);
             _powerBar.SetActive(true);
-            HideStatusText();
-            ShowStatusText(_kickOffText, _promptDuration);
+            StartCoroutine(PromptStatusText(_kickOffText, _promptDuration));
         }
         if (notificationType == NotificationType.BallShot)
         {
@@ -79,7 +77,7 @@ public class HUDController : MonoBehaviour, Observer
         }
         if (notificationType == NotificationType.GoalHit)
         {
-            ShowStatusText(_goalText, _promptDuration);
+            StartCoroutine(PromptStatusText(_goalText, _promptDuration));
         }
         if (notificationType == NotificationType.ScoreChange)
         {
@@ -126,18 +124,19 @@ public class HUDController : MonoBehaviour, Observer
         _distanceText.text = distance.ToString("00.0");
     }
 
-    
-
-    private void ShowStatusText(GameObject statusText, float duration)
+    IEnumerator PromptStatusText(GameObject statusText, float duration)
     {
         HideStatusText();
         _currentStatusText = statusText;
         _currentStatusText.SetActive(true);
-        Invoke("HideStatusText", duration);
+        yield return new WaitForSeconds(duration);
+        _currentStatusText.SetActive(false);
     }
+    
 
     private void ShowStatusText(GameObject statusText)
     {
+        HideStatusText();
         _currentStatusText = statusText;
         _currentStatusText.SetActive(true);
     }
@@ -145,7 +144,10 @@ public class HUDController : MonoBehaviour, Observer
     private void HideStatusText()
     {
         if (_currentStatusText!=null && _currentStatusText.activeSelf)
+        {
+            StopCoroutine("PromptStatusText");
             _currentStatusText.SetActive(false);
+        }
     }
 
     private void HideBall(int imageIndex)
