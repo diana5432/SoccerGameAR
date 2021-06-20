@@ -16,6 +16,7 @@ public class HUDController : MonoBehaviour, Observer
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private Button _pauseButton;
     [SerializeField] private GameObject _resumeButton;
+    [SerializeField] private GameObject _restartButton;
     [SerializeField] private GameObject _placingMenu;
     [SerializeField] private GameObject _scalingMenu;
     [SerializeField] private GameObject _powerBar;
@@ -64,6 +65,7 @@ public class HUDController : MonoBehaviour, Observer
         }
         if (notificationType == NotificationType.SeriesPlay)
         {
+            HidePauseMenu();
             _scalingMenu.SetActive(false);
             _powerBar.SetActive(true);
             StartCoroutine(PromptStatusText(_kickOffText, _promptDuration));
@@ -104,16 +106,19 @@ public class HUDController : MonoBehaviour, Observer
         if (_series.GetPhase() == ((int) SeriesPhase.DONE))
         {       
             _resumeButton.SetActive(false);
+            _restartButton.SetActive(true);
             _pauseButton.interactable = false;
         }
         else
         {
             if (!_resumeButton.activeSelf)
                 _resumeButton.SetActive(true);
-        }
+            
+            if (_restartButton.activeSelf)
+                _restartButton.SetActive(false);
 
-        if (_series.GetPhase() != ((int) SeriesPhase.DONE))
             _series.PauseGame();
+        }
     }
 
     private void HidePauseMenu()
@@ -127,6 +132,9 @@ public class HUDController : MonoBehaviour, Observer
         }
         if (_series.GetPhase() == ((int) SeriesPhase.SCALE))
             _scalingMenu.SetActive(true);
+
+        if (_series.GetPhase() == ((int) SeriesPhase.PLAY))
+            _pauseButton.interactable = true;
 
         if (_series.IsPaused())
             _series.PauseGame();

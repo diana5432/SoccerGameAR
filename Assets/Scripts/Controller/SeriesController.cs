@@ -77,6 +77,9 @@ public class SeriesController : Subject, Observer
     {
         _phase = (int) SeriesPhase.PLAY;
         Notify(0,NotificationType.SeriesPlay);
+        _trials = _maxTrials;
+        _points = 0;
+        Notify(_points, NotificationType.ScoreChange);
     }
 
     private void SeriesDone()
