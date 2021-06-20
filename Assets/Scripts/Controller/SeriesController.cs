@@ -18,6 +18,7 @@ public class SeriesController : Subject, Observer
     private int _trials;
     private int _points;
     private int _phase;
+    private bool _isPaused;
 
 
     private void Start()
@@ -26,6 +27,8 @@ public class SeriesController : Subject, Observer
             _goal.RegisterObserver(this);
         if (_ball!=null)
             _ball.RegisterObserver(this);
+        
+        _isPaused = false;
 
         SeriesStart();
     }
@@ -90,6 +93,21 @@ public class SeriesController : Subject, Observer
     public int GetPhase()
     {
         return _phase;
+    }
+
+    public void PauseGame()
+    {
+        _isPaused = !_isPaused;
+
+        if (_isPaused)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
+    }
+
+    public bool IsPaused()
+    {
+        return _isPaused;
     }
 
     // for debugging

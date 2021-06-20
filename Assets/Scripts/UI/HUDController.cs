@@ -14,6 +14,7 @@ public class HUDController : MonoBehaviour, Observer
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _distanceText;
     [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private Button _pauseButton;
     [SerializeField] private GameObject _resumeButton;
     [SerializeField] private GameObject _placingMenu;
     [SerializeField] private GameObject _scalingMenu;
@@ -49,10 +50,10 @@ public class HUDController : MonoBehaviour, Observer
         if (notificationType == NotificationType.SeriesScan)
         {
             HidePauseMenu();
-            ResetBalls();
-            UpdateDistance(0f);
             _powerBar.SetActive(false);
             _placingMenu.SetActive(true);
+            ResetBalls();
+            UpdateDistance(0f);
             ShowStatusText(_scanText);
         }
         if (notificationType == NotificationType.SeriesScale)
@@ -101,21 +102,34 @@ public class HUDController : MonoBehaviour, Observer
         _pauseMenu.SetActive(true);
 
         if (_series.GetPhase() == ((int) SeriesPhase.DONE))
+        {       
             _resumeButton.SetActive(false);
+            _pauseButton.interactable = false;
+        }
         else
+        {
             if (!_resumeButton.activeSelf)
                 _resumeButton.SetActive(true);
+        }
+
+        if (_series.GetPhase() != ((int) SeriesPhase.DONE))
+            _series.PauseGame();
     }
 
     private void HidePauseMenu()
     {
+        _pauseMenu.SetActive(false);
+
         if (_series.GetPhase() == ((int) SeriesPhase.SCAN))
+        {
             _placingMenu.SetActive(true);
+            _pauseButton.interactable = true;
+        }
         if (_series.GetPhase() == ((int) SeriesPhase.SCALE))
             _scalingMenu.SetActive(true);
 
-        _pauseMenu.SetActive(false);
-
+        if (_series.IsPaused())
+            _series.PauseGame();
     }
 
     public void TogglePauseMenu()

@@ -17,6 +17,7 @@ public class BallController : Subject, Observer
     private float _shotDistance;
     private bool _isReadyToKick;
 
+
     void Awake() 
     {
         if (_series!=null)
@@ -52,19 +53,19 @@ public class BallController : Subject, Observer
 
     private void OnMouseDown()
     {
-        if (_isReadyToKick)
+        if (_isReadyToKick & !_series.IsPaused())
             _timeCorrection = Time.time;
     }
 
     private void OnMouseDrag()
     {
-        if (_isReadyToKick)
+        if (_isReadyToKick & !_series.IsPaused())
             _actualPower = Mathf.Abs(Mathf.Sin((Time.time - _timeCorrection) * _speedFactor)) * _maxPower;
     }
 
     private void OnMouseUp()
     {
-        if (_isReadyToKick)
+        if (_isReadyToKick & !_series.IsPaused())
         {
             _rb.useGravity = true;
             _rb.AddForce((_penaltySpot.forward + (_penaltySpot.up * 0.33f)) * _actualPower, ForceMode.Impulse);

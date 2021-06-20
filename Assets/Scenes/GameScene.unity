@@ -165,6 +165,7 @@ MonoBehaviour:
   _scoreText: {fileID: 1825038991}
   _distanceText: {fileID: 1319045092}
   _pauseMenu: {fileID: 1897748337}
+  _pauseButton: {fileID: 944049465}
   _resumeButton: {fileID: 1735529691}
   _placingMenu: {fileID: 89233390}
   _scalingMenu: {fileID: 1140064018}
