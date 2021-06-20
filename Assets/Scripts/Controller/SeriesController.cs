@@ -16,7 +16,9 @@ public class SeriesController : Subject, Observer
     
     private int _maxTrials = 3;
     private int _trials;
-    private int _points;
+    private int _score;
+    private float _lastShotDistance = 0f;
+    
     private int _phase;
     private bool _isPaused;
 
@@ -38,10 +40,13 @@ public class SeriesController : Subject, Observer
         if (notificationType == NotificationType.BallShot)
             _trials -= 1;
 
+        if (notificationType == NotificationType.DistanceChange)
+            _lastShotDistance = (float)value;
+
         if (notificationType == NotificationType.GoalHit)
         {
-            _points += (int)((float)value * 1000);
-            Notify(_points, NotificationType.ScoreChange);
+            _score += (int)((float)value * _lastShotDistance * 1000);
+            Notify(_score, NotificationType.ScoreChange);
         }
         if (_trials <= 0)
         {
@@ -56,8 +61,8 @@ public class SeriesController : Subject, Observer
         _phase = (int) SeriesPhase.SCAN;
         Notify(0,NotificationType.SeriesScan);
         _trials = _maxTrials;
-        _points = 0;
-        Notify(_points, NotificationType.ScoreChange);
+        _score = 0;
+        Notify(_score, NotificationType.ScoreChange);
     }
 
     public void SeriesScale()
@@ -67,10 +72,6 @@ public class SeriesController : Subject, Observer
             _phase = (int) SeriesPhase.SCALE;
             Notify(0,NotificationType.SeriesScale);
         }
-        else
-        {
-            Debug.Log("Place a Goal at first!");
-        }
     }
 
     public void SeriesPlay()
@@ -78,8 +79,8 @@ public class SeriesController : Subject, Observer
         _phase = (int) SeriesPhase.PLAY;
         Notify(0,NotificationType.SeriesPlay);
         _trials = _maxTrials;
-        _points = 0;
-        Notify(_points, NotificationType.ScoreChange);
+        _score = 0;
+        Notify(_score, NotificationType.ScoreChange);
     }
 
     private void SeriesDone()
