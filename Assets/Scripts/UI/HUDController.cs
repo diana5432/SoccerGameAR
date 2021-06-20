@@ -25,7 +25,7 @@ public class HUDController : MonoBehaviour, Observer
     [SerializeField] private GameObject _missedText;
     [SerializeField] private GameObject _doneText;
     // Parameters
-    [SerializeField] float _promptDuration = 2f;
+    [SerializeField] float _promptDuration = 3f;
 
     private GameObject _currentStatusText;
     
@@ -93,7 +93,13 @@ public class HUDController : MonoBehaviour, Observer
 
     private void ShowPauseMenu()
     {
+        if (_series.GetPhase() == ((int) SeriesPhase.SCAN))
+            _placingMenu.SetActive(false);
+        if (_series.GetPhase() == ((int) SeriesPhase.SCALE))
+            _scalingMenu.SetActive(false);
+
         _pauseMenu.SetActive(true);
+
         if (_series.GetPhase() == ((int) SeriesPhase.DONE))
             _resumeButton.SetActive(false);
         else
@@ -103,7 +109,13 @@ public class HUDController : MonoBehaviour, Observer
 
     private void HidePauseMenu()
     {
+        if (_series.GetPhase() == ((int) SeriesPhase.SCAN))
+            _placingMenu.SetActive(true);
+        if (_series.GetPhase() == ((int) SeriesPhase.SCALE))
+            _scalingMenu.SetActive(true);
+
         _pauseMenu.SetActive(false);
+
     }
 
     public void TogglePauseMenu()
