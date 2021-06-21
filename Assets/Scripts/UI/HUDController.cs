@@ -68,6 +68,8 @@ public class HUDController : MonoBehaviour, Observer
             HidePauseMenu();
             _scalingMenu.SetActive(false);
             _powerBar.SetActive(true);
+            ResetBalls();
+            UpdateDistance(0f);
             StartCoroutine(PromptStatusText(_kickOffText, _promptDuration));
         }
         if (notificationType == NotificationType.BallShot)

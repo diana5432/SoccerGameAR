@@ -45,7 +45,10 @@ public class SeriesController : Subject, Observer
 
         if (notificationType == NotificationType.GoalHit)
         {
-            _score += (int)((float)value * _lastShotDistance * 1000);
+            int shotscore = (int)((float)value * _lastShotDistance * 1000);
+            Notify(shotscore, NotificationType.ShotScore);
+            
+            _score += shotscore;
             Notify(_score, NotificationType.ScoreChange);
         }
         if (_trials <= 0)

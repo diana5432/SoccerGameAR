@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _series: {fileID: 1978894427}
-  _goal: {fileID: 1871715364}
+  _goal: {fileID: 1080709995}
   _ball: {fileID: 637124034}
   _ballImages:
   - {fileID: 1053985950}
@@ -3704,7 +3704,7 @@ PrefabInstance:
     - target: {fileID: 135134225773752490, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 13400000, guid: 10550e2ad76bff944bc9bee45f5aa607, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
 --- !u!4 &637124032 stripped
@@ -5704,6 +5704,25 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1080709992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8526433847580556484, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+  m_PrefabInstance: {fileID: 1871715361}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1080709995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080709992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583d4ae4f6d32f36382e6afb68a33ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseLineCenter: {fileID: 1871715362}
+  _goalPanel: {fileID: 1871715363}
 --- !u!1 &1104926824
 GameObject:
   m_ObjectHideFlags: 0
@@ -9806,17 +9825,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4567528105584317365, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4567528106213265633, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
       propertyPath: _series
       value: 
       objectReference: {fileID: 1978894427}
+    - target: {fileID: 5096123671780751000, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526433847580556484, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_Name
+      value: Tor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
 --- !u!4 &1871715362 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7398960485141367184, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 877778905304458571, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
   m_PrefabInstance: {fileID: 1871715361}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1871715363 stripped
@@ -9824,17 +9851,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4567528105584317364, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
   m_PrefabInstance: {fileID: 1871715361}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1871715364 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8250375218375552973, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
-  m_PrefabInstance: {fileID: 1871715361}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 583d4ae4f6d32f36382e6afb68a33ca1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1879387197
 GameObject:
   m_ObjectHideFlags: 0
@@ -10103,7 +10119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40fe53df96bcd9c9b917e98c0896fc2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _goal: {fileID: 1871715364}
+  _goal: {fileID: 1080709995}
   _ball: {fileID: 637124034}
   _goalPanel: {fileID: 840899303}
   _ballResetDuration: 3

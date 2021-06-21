@@ -47,11 +47,14 @@ public class ScoreDisplayController : MonoBehaviour, Observer
 
         if (notificationType == NotificationType.BallShot)
             _shotIndex = (int)value % _scores.Length;
+            Debug.Log(_shotIndex);
         
-        if (notificationType == NotificationType.ScoreChange)
+        if (notificationType == NotificationType.ShotScore)
         {
             _scores[_shotIndex] = (int)value;
+            Debug.Log((int)value);
             _totalScore += (int)value;
+            Debug.Log(_totalScore);
         }   
     }
 
@@ -92,10 +95,6 @@ public class ScoreDisplayController : MonoBehaviour, Observer
 
     private IEnumerator DisplayScore()
     {
-        foreach (int score in _scores)
-            Debug.Log(score);
-        Debug.Log(_totalScore);
-
         UpdateScoreTexts();
         UpdatePictogramPanel();
 
@@ -105,6 +104,5 @@ public class ScoreDisplayController : MonoBehaviour, Observer
             yield return new WaitForSeconds(1f);
         }
         _totalScoreLine.SetActive(true);
-
     }
 }
