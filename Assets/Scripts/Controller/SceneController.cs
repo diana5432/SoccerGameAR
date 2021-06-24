@@ -7,14 +7,6 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    public void LoadInfoScene() {  
-        SceneManager.LoadScene("InfoScene");
-    }
-
-    public void LoadCreditsScene() {  
-        SceneManager.LoadScene("CreditsScene");
-    }
-
     public void LoadTitleScene() {  
         SceneManager.LoadScene("TitleScene");
     }
