@@ -63,9 +63,7 @@ public class SeriesController : Subject, Observer
     {
         _phase = (int) SeriesPhase.SCAN;
         Notify(0,NotificationType.SeriesScan);
-        _trials = _maxTrials;
-        _score = 0;
-        Notify(_score, NotificationType.ScoreChange);
+        PrepareNewSeries();
     }
 
     public void SeriesScale()
@@ -81,15 +79,21 @@ public class SeriesController : Subject, Observer
     {
         _phase = (int) SeriesPhase.PLAY;
         Notify(0,NotificationType.SeriesPlay);
-        _trials = _maxTrials;
-        _score = 0;
-        Notify(_score, NotificationType.ScoreChange);
+        PrepareNewSeries();
     }
 
     private void SeriesDone()
     {
         _phase = (int) SeriesPhase.DONE;
         Notify(0, NotificationType.SeriesDone);
+    }
+
+    private void PrepareNewSeries()
+    {
+        _trials = _maxTrials;
+        _score = 0;
+        Notify(_score, NotificationType.ScoreChange);
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
 
     private void ResetBall()
@@ -107,9 +111,16 @@ public class SeriesController : Subject, Observer
         _isPaused = !_isPaused;
 
         if (_isPaused)
+        {
             Time.timeScale = 0f;
+            Screen.sleepTimeout = SleepTimeout.SystemSetting;
+        }
         else
+        {
             Time.timeScale = 1f;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        }
+
     }
 
     public bool IsPaused()
