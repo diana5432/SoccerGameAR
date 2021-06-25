@@ -22,7 +22,6 @@ public class GoalController : Subject
             float _hitDistanceFromCenter = Vector3.Distance(hitPosition, _baseLineCenter.position);
             _hitDistanceFromCenter *= _scaleCorrectionFactor;
             Notify(_hitDistanceFromCenter, NotificationType.GoalHit);
-            Debug.Log(_hitDistanceFromCenter);
         }
     }
 

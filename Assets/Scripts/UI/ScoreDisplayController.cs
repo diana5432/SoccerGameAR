@@ -47,14 +47,11 @@ public class ScoreDisplayController : MonoBehaviour, Observer
 
         if (notificationType == NotificationType.BallShot)
             _shotIndex = (int)value % _scores.Length;
-            Debug.Log(_shotIndex);
         
         if (notificationType == NotificationType.ShotScore)
         {
             _scores[_shotIndex] = (int)value;
-            Debug.Log((int)value);
             _totalScore += (int)value;
-            Debug.Log(_totalScore);
         }   
     }
 
