@@ -17,6 +17,7 @@ public class BallController : Subject, Observer
     private float _shotDistance;
     private bool _isReadyToKick;
 
+    
 
     void Awake() 
     {
@@ -101,5 +102,5 @@ public class BallController : Subject, Observer
     // Getters
     public float GetMaxPower(){ return _maxPower; }
     public float GetActualPower(){ return _actualPower; }
-    //public void SetActualPower(float power){ _actualPower = power;}
+    public int GetBallShotIndex(){ return _ballShotIndex; }
 }

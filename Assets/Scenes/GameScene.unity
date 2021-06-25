@@ -283,6 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _series: {fileID: 1978894427}
   _ball: {fileID: 637124034}
+  _HUD: {fileID: 2214522}
   _scoreDisplay: {fileID: 124787355}
   _ticks:
   - {fileID: 535218415}
@@ -3886,7 +3887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &723150229
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5723,6 +5724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseLineCenter: {fileID: 1871715362}
   _goalPanel: {fileID: 1871715363}
+  _ball: {fileID: 637124034}
 --- !u!1 &1099871137
 GameObject:
   m_ObjectHideFlags: 0
@@ -10033,6 +10035,18 @@ PrefabInstance:
       propertyPath: m_SphereColliders.Array.data[0].first
       value: 
       objectReference: {fileID: 637124036}
+    - target: {fileID: 4100993523171014407, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567528105279799597, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.844387
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567528105279799597, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.365
+      objectReference: {fileID: 0}
     - target: {fileID: 4567528105584317364, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -10059,7 +10073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4567528105584317364, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.527
+      value: 2.225
       objectReference: {fileID: 0}
     - target: {fileID: 4567528105584317364, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10095,7 +10109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4567528105584317365, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4567528106213265633, guid: 022b3d12ce9707edf906aad6c873b12d, type: 3}
       propertyPath: _series

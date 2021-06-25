@@ -9,6 +9,7 @@ public class ScoreDisplayController : MonoBehaviour, Observer
     [SerializeField] private SeriesController _series;
     [SerializeField] private BallController _ball;
 
+    [SerializeField] private HUDController _HUD;
     [SerializeField] private GameObject _scoreDisplay; // parent object
     [SerializeField] private GameObject[] _ticks;
     [SerializeField] private GameObject[] _crosses;
@@ -101,5 +102,9 @@ public class ScoreDisplayController : MonoBehaviour, Observer
             yield return new WaitForSeconds(1f);
         }
         _totalScoreLine.SetActive(true);
+        
+        yield return new WaitForSeconds(1f);
+
+        _HUD.ShowPauseMenu();
     }
 }

@@ -90,13 +90,12 @@ public class HUDController : MonoBehaviour, Observer
         }
         if (notificationType == NotificationType.SeriesDone)
         {
-            // TODO show final points and menu quit/restart
             ShowStatusText(_doneText);
-            Invoke("ShowPauseMenu", 1f);
+            _pauseButton.interactable = false;
         }
     }
 
-    private void ShowPauseMenu()
+    public void ShowPauseMenu()
     {
         if (_series.GetPhase() == ((int) SeriesPhase.SCAN))
             _placingMenu.SetActive(false);
@@ -195,10 +194,5 @@ public class HUDController : MonoBehaviour, Observer
     {
         foreach (Image ball in _ballImages)
             ball.gameObject.SetActive(true);
-    }
-
-    private void ColorizeBall(int imageIndex, Color color)
-    {
-        _ballImages[imageIndex].color = color;
     }
 }
