@@ -6,8 +6,8 @@ public class KeeperController : MonoBehaviour, Observer
 {
     [SerializeField] private SeriesController _series;
 
-    [SerializeField] private float minWaitTime = 0.5f;
-    [SerializeField] private float maxWaitTime = 1.5f;
+    [SerializeField] private float minWaitTime = 0.25f;
+    [SerializeField] private float maxWaitTime = 1.0f;
         
     private AnimationClip[] clips;
     private Animator animator;

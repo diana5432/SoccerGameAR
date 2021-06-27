@@ -128,12 +128,4 @@ public class SeriesController : Subject, Observer
         return _isPaused;
     }
 
-    // for debugging
-    private void Update() 
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            _goalPanel.SpawnAtPosition(new Vector3(0f, 0f, 4f));
-        }
-    } 
 }
